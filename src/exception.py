@@ -16,11 +16,14 @@ class CustomException(Exception):
     def __str__(self):
         return self.error_message
 
-if __name__ == "__main__":
-    import sys
-    try:
-        a=1/ 0
-    except Exception as e:
-        logging.info("logging has started")
-        raise CustomException(e, sys)
+#####  python -m src.exception  ✅      ## to run this file directly
+
+
+# if __name__ == "__main__":
+#     import sys
+#     try:
+#         a=1/ 0
+#     except Exception as e:
+#         logging.info("logging has started")
+#         raise CustomException(e, sys)
 
