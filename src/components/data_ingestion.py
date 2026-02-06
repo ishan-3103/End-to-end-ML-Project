@@ -8,12 +8,14 @@ from sklearn.model_selection import train_test_split
 from dataclasses import dataclass   ## used to create class varaibles 
 
 @dataclass
-class DataIngestionConfig:
+class DataIngestionConfig:      ### this class is used to store the path of train test and raw data
     train_data_path: str=os.path.join("artifacts","train.csv")  ### : str is just for type hinting, it is almost same as str(os.path.join....)
     test_data_path: str=os.path.join("artifacts","test.csv")
     raw_data_path: str=os.path.join("artifacts","raw.csv")
 
-class dataingestion:
+
+
+class DataIngestion:
     def __init__(self):
         self.ingestion_config=DataIngestionConfig()
     def initiate_data_ingestion(self):
@@ -40,7 +42,12 @@ class dataingestion:
 
         except Exception as e:
             raise CustomException(e,sys)
-        
+
+from src.components.data_transformation import DataTransformation, DataTransformationConfig
+
 if __name__=="__main__":
-    obj=dataingestion()
-    obj.initiate_data_ingestion()
+    obj=DataIngestion()
+    train_data,test_data=obj.initiate_data_ingestion()
+
+    data_transformation=DataTransformation()
+    data_transformation.initiate_data_transform(train_data,test_data)
