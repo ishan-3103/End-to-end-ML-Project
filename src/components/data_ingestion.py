@@ -44,10 +44,14 @@ class DataIngestion:
             raise CustomException(e,sys)
 
 from src.components.data_transformation import DataTransformation, DataTransformationConfig
+from src.components.model_trainer import model_trainer_config,ModelTrainer
 
 if __name__=="__main__":
     obj=DataIngestion()
     train_data,test_data=obj.initiate_data_ingestion()
 
     data_transformation=DataTransformation()
-    data_transformation.initiate_data_transform(train_data,test_data)
+    train_arr,test_arr,_=data_transformation.initiate_data_transform(train_data,test_data)
+    
+    modeltrainer=ModelTrainer()
+    print(modeltrainer.initiate_model_training(train_arr,test_arr))

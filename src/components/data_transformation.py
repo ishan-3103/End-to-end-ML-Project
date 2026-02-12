@@ -74,14 +74,14 @@ class DataTransformation:
             target_feature_test_df=test_df[target_column_name]
             logging.info("applying preprocessing on training and testing dataframe")
 
-            input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)
+            input_feature_train_arr=preprocessing_obj.fit_transform(input_feature_train_df)    ## it automatically gets converted into an array
             input_feature_test_arr=preprocessing_obj.transform(input_feature_test_df)
             
             train_arr=np.c_[
-                input_feature_train_arr, np.array(input_feature_train_df)
+                input_feature_train_arr, np.array(target_feature_train_df)
             ]
             test_arr=np.c_[
-                input_feature_test_arr, np.array(input_feature_test_df)
+                input_feature_test_arr, np.array(target_feature_test_df)
             ]
 
             logging.info("saving preprocessing obj")
